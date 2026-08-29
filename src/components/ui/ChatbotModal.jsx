@@ -562,7 +562,7 @@ export default function ChatbotModal({
                     <h3 className="text-[14px] font-semibold text-white tracking-wide flex items-center gap-1.5">
                       {BOT_NAME}
                       <span className="text-[9px] font-mono font-medium px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
-                        {(apiKey || ENV_API_KEY) ? 'GEMINI AI' : 'OFFLINE AI'}
+                        {(apiKey || ENV_API_KEY) ? 'GROQ AI' : 'OFFLINE AI'}
                       </span>
                     </h3>
                   </div>

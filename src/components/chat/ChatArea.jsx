@@ -54,7 +54,7 @@ export default function ChatArea({ activeConvId, getConversation, updateConversa
               </div>
               <div className="text-center">
                 <h2 className="text-2xl font-bold text-white font-sans-ui">Nova AI</h2>
-                <p className="text-sm text-slate-400 mt-1 font-mono">Powered by Gemini 2.5 Flash · Ask me anything</p>
+                <p className="text-sm text-slate-400 mt-1 font-mono">Powered by Groq Llama 3 · Ask me anything</p>
               </div>
             </div>
 
