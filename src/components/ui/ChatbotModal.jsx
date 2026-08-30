@@ -5,8 +5,6 @@ import {
   Send,
   Mic,
   MicOff,
-  Volume2,
-  VolumeX,
   Maximize2,
   Minimize2,
   X,
@@ -237,8 +235,8 @@ export default function ChatbotModal({
   const [inputVal, setInputVal] = useState('')
   const [isTyping, setIsTyping] = useState(false)
   const [copiedKey, setCopiedKey] = useState(null)
-  const [soundEnabled, setSoundEnabled] = useState(true)
-  const [ttsEnabled, setTtsEnabled] = useState(false)
+  const [soundEnabled] = useState(true)
+  const [ttsEnabled] = useState(false)
   const [isListening, setIsListening] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('Projects')
@@ -523,7 +521,7 @@ export default function ChatbotModal({
             className={`fixed z-50 flex flex-col pointer-events-auto select-text font-sans-ui ${
               isExpanded
                 ? 'inset-4 sm:inset-10 sm:max-w-4xl sm:mx-auto'
-                : 'inset-3 sm:inset-auto sm:bottom-24 sm:right-6 w-[calc(100vw-1.5rem)] sm:w-[450px] h-[calc(100vh-2rem)] sm:h-[580px] max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-8rem)]'
+                : 'bottom-20 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-24 w-auto sm:w-[450px] h-[480px] sm:h-[580px] max-h-[75vh] sm:max-h-[calc(100vh-8rem)]'
             }`}
             style={{
               background: 'rgba(8, 13, 35, 0.94)',
@@ -574,33 +572,6 @@ export default function ChatbotModal({
 
               {/* Header Action Tools */}
               <div className="flex items-center gap-1 text-slate-400">
-                {/* Voice Output (TTS) */}
-                <button
-                  onClick={() => {
-                    setTtsEnabled(!ttsEnabled)
-                    if (ttsEnabled && window.speechSynthesis) window.speechSynthesis.cancel()
-                  }}
-                  data-cursor-hover
-                  title={ttsEnabled ? 'Mute Voice Output' : 'Enable Spoken Voice (TTS)'}
-                  className={`p-2 rounded-lg transition-colors cursor-pointer ${
-                    ttsEnabled ? 'text-cyan-300 bg-cyan-500/15' : 'hover:text-white hover:bg-white/[0.06]'
-                  }`}
-                >
-                  {ttsEnabled ? <Volume2 size={15} /> : <VolumeX size={15} />}
-                </button>
-
-                {/* Sound FX toggle */}
-                <button
-                  onClick={() => setSoundEnabled(!soundEnabled)}
-                  data-cursor-hover
-                  title={soundEnabled ? 'Disable UI Sound Effects' : 'Enable UI Sound Effects'}
-                  className={`p-2 rounded-lg transition-colors cursor-pointer ${
-                    soundEnabled ? 'text-cyan-300 bg-cyan-500/15' : 'hover:text-white hover:bg-white/[0.06]'
-                  }`}
-                >
-                  <Sparkles size={15} />
-                </button>
-
                 {/* LLM Settings */}
                 <button
                   onClick={() => setShowSettings(!showSettings)}
