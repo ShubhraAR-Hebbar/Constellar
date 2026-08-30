@@ -20,7 +20,6 @@ import {
   Layers,
   ChevronDown,
   Info,
-  KeyRound,
 } from 'lucide-react'
 import {
   BOT_NAME,
@@ -238,7 +237,6 @@ export default function ChatbotModal({
   const [soundEnabled] = useState(true)
   const [ttsEnabled] = useState(false)
   const [isListening, setIsListening] = useState(false)
-  const [showSettings, setShowSettings] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('Projects')
   const [unreadCount, setUnreadCount] = useState(1)
   const [hasOpenedOnce, setHasOpenedOnce] = useState(false)
@@ -247,7 +245,7 @@ export default function ChatbotModal({
   const ENV_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || ''
 
   // Gemini API key: user-set key from localStorage takes priority, then env key
-  const [apiKey, setApiKey] = useState(() => localStorage.getItem('constellar_gemini_key') || ENV_API_KEY)
+  const [apiKey] = useState(() => localStorage.getItem('constellar_gemini_key') || ENV_API_KEY)
 
   const messagesEndRef = useRef(null)
   const inputRef = useRef(null)
@@ -414,23 +412,7 @@ export default function ChatbotModal({
     }
   }
 
-  // Save Settings
-  const handleSaveSettings = (e) => {
-    e.preventDefault()
-    localStorage.setItem('constellar_gemini_key', apiKey.trim())
-    setShowSettings(false)
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: `sys-${Date.now()}`,
-        sender: 'bot',
-        text: apiKey.trim()
-          ? `✅ **Gemini AI Connected!** Nova is now powered by **Google Gemini 2.0 Flash** — ask me anything about Shubhra's work, projects, or tech stack!`
-          : `⚡ **Offline Mode Active!** Nova will use the built-in neural knowledge engine. Add a Gemini API key above to enable live AI responses.`,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      },
-    ])
-  }
+
 
   return (
     <>
@@ -572,17 +554,7 @@ export default function ChatbotModal({
 
               {/* Header Action Tools */}
               <div className="flex items-center gap-1 text-slate-400">
-                {/* LLM Settings */}
-                <button
-                  onClick={() => setShowSettings(!showSettings)}
-                  data-cursor-hover
-                  title="Configure LLM API Key"
-                  className={`p-2 rounded-lg transition-colors cursor-pointer ${
-                    showSettings ? 'text-cyan-300 bg-cyan-500/15' : 'hover:text-white hover:bg-white/[0.06]'
-                  }`}
-                >
-                  <KeyRound size={15} />
-                </button>
+
 
                 {/* Clear Chat */}
                 <button
@@ -631,87 +603,7 @@ export default function ChatbotModal({
               </div>
             </header>
 
-            {/* ── Gemini API Key Settings Drawer ── */}
-            <AnimatePresence>
-              {showSettings && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  className="px-5 py-4 border-b border-cyan-500/20 bg-cyan-950/30 overflow-hidden shrink-0"
-                >
-                  <form onSubmit={handleSaveSettings} className="space-y-3">
-                    {/* Header */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1.5 text-[11px] font-mono text-cyan-300">
-                        <KeyRound size={13} />
-                        <span>GOOGLE GEMINI API KEY</span>
-                      </div>
-                      <a
-                        href="https://aistudio.google.com/apikey"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[10px] text-cyan-400 hover:text-cyan-300 underline flex items-center gap-1"
-                      >
-                        Get free key ↗
-                      </a>
-                    </div>
-                    {ENV_API_KEY && !localStorage.getItem('constellar_gemini_key') && (
-                      <div className="flex items-center gap-1.5 text-[10px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-lg px-2.5 py-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
-                        Gemini AI is active via built-in key. You can override it below.
-                      </div>
-                    )}
 
-                    {/* API Key input */}
-                    <div>
-                      <label className="block text-[10px] font-mono text-slate-300 mb-1">
-                        Gemini API Key <span className="text-slate-500">(from Google AI Studio — free tier available)</span>
-                      </label>
-                      <input
-                        type="password"
-                        value={apiKey}
-                        onChange={(e) => setApiKey(e.target.value)}
-                        placeholder="AIza..."
-                        className="w-full text-[12px] bg-slate-900/90 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-cyan-400 font-mono"
-                      />
-                    </div>
-
-                    {/* Model info badge */}
-                    <div className="flex items-center gap-1.5 text-[10px] text-slate-400">
-                      <span className="px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-mono text-[9px]">gemini-2.5-flash</span>
-                      <span>Fast, free, and intelligent — powered by Google DeepMind</span>
-                    </div>
-
-                    <div className="flex items-center justify-between pt-1">
-                      <p className="text-[10px] text-slate-400">
-                        Saved securely in your browser's <code className="text-cyan-300">localStorage</code>.
-                      </p>
-                      <div className="flex gap-2">
-                        {apiKey && (
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setApiKey('')
-                              localStorage.removeItem('constellar_gemini_key')
-                            }}
-                            className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-red-500/20 text-red-300 hover:bg-red-500/30 transition-colors"
-                          >
-                            Remove Key
-                          </button>
-                        )}
-                        <button
-                          type="submit"
-                          className="px-3 py-1 rounded-md text-[11px] font-mono font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-500/30 transition-colors"
-                        >
-                          {apiKey ? 'Save & Activate Gemini' : 'Use Offline AI'}
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </motion.div>
-              )}
-            </AnimatePresence>
 
             {/* ── Category Quick Navigator Pills ── */}
             <div className="px-4 py-2 border-b border-white/[0.05] bg-black/20 flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0">
