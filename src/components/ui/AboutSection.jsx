@@ -26,7 +26,7 @@ export default function AboutSection({ scrollProgress = 0 }) {
   )
 
   return (
-    <div className="fixed inset-0 z-20 flex items-center justify-start px-8 md:px-14 lg:px-20 pointer-events-none">
+    <div className="fixed inset-0 z-20 flex items-center justify-start px-4 sm:px-8 md:px-14 lg:px-20 pointer-events-none">
       <AnimatePresence>
         <motion.div
           key="about"
@@ -34,21 +34,22 @@ export default function AboutSection({ scrollProgress = 0 }) {
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="max-w-2xl w-full pointer-events-auto"
+          className="max-w-2xl w-full pointer-events-auto no-scrollbar"
           style={{
             background: 'rgba(7, 10, 28, 0.85)',
             backdropFilter: 'blur(28px)',
             WebkitBackdropFilter: 'blur(28px)',
             border: '1px solid rgba(125,216,255,0.13)',
             borderRadius: '24px',
-            overflow: 'hidden',
+            maxHeight: '85vh',
+            overflowY: 'auto',
             boxShadow: '0 0 70px rgba(0,0,0,0.65), 0 0 30px rgba(125,216,255,0.07), inset 0 1px 0 rgba(255,255,255,0.05)',
           }}
         >
           {/* Accent top bar */}
           <div style={{ height: 2, background: 'linear-gradient(90deg, transparent, #7dd8ff 40%, #b388ff 60%, transparent)' }} />
 
-          <div className="p-8 sm:p-10">
+          <div className="p-5 sm:p-10">
             {/* ── Section label ── */}
             <motion.div variants={itemV} className="flex items-center gap-2 mb-4">
               <Cpu size={13} className="text-cyan-500" />
@@ -112,7 +113,7 @@ export default function AboutSection({ scrollProgress = 0 }) {
             </motion.div>
 
             {/* ── Education ── */}
-            <motion.div variants={itemV} className="grid grid-cols-2 gap-3" style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '1.25rem' }}>
+            <motion.div variants={itemV} className="grid grid-cols-1 sm:grid-cols-2 gap-3" style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '1.25rem' }}>
               {profile.education.map((edu, i) => (
                 <div
                   key={i}

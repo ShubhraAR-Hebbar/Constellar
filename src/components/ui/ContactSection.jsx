@@ -34,14 +34,14 @@ export default function ContactSection({ scrollProgress = 0 }) {
   if (!isVisible) return null
 
   return (
-    <div className="fixed inset-0 z-20 flex items-center justify-center px-6 pointer-events-none">
+    <div className="fixed inset-0 z-20 flex items-center justify-center px-4 sm:px-6 pointer-events-none">
       <AnimatePresence>
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="max-w-lg w-full pointer-events-auto text-center"
+          className="max-w-lg w-full pointer-events-auto text-center no-scrollbar"
           style={{
             background: 'rgba(8, 13, 35, 0.82)',
             backdropFilter: 'blur(28px)',
@@ -49,7 +49,8 @@ export default function ContactSection({ scrollProgress = 0 }) {
             borderRadius: '28px',
             border: '1px solid rgba(125,216,255,0.18)',
             boxShadow: '0 0 80px rgba(0,0,0,0.7), 0 0 40px rgba(125,216,255,0.1), inset 0 1px 0 rgba(255,255,255,0.06)',
-            overflow: 'hidden',
+            maxHeight: '85vh',
+            overflowY: 'auto',
           }}
         >
           {/* Accent top bar */}
@@ -58,7 +59,7 @@ export default function ContactSection({ scrollProgress = 0 }) {
             style={{ background: 'linear-gradient(90deg, transparent, #7dd8ff, #b388ff, transparent)' }}
           />
 
-          <div className="px-8 sm:px-10 py-10">
+          <div className="px-5 py-8 sm:px-10 sm:py-10">
             {/* ── Label ── */}
             <motion.div variants={itemVariants} className="flex items-center justify-center gap-2 mb-5">
               <div className="w-6 h-px bg-cyan-500/60" />
@@ -83,7 +84,7 @@ export default function ContactSection({ scrollProgress = 0 }) {
             </motion.p>
 
             {/* ── Contact links ── */}
-            <motion.div variants={itemVariants} className="grid grid-cols-2 gap-3 mb-6">
+            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
               {[
                 { icon: <Mail size={15} />, label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
                 { icon: <Phone size={15} />, label: 'Phone', value: profile.phone, href: `tel:${profile.phone}` },

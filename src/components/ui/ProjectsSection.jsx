@@ -42,7 +42,7 @@ export default function ProjectsSection({ scrollProgress = 0 }) {
   const rgb = accent === '#ffb86b' ? '255,184,107' : accent === '#b388ff' ? '179,136,255' : '124,255,178'
 
   return (
-    <div className="fixed inset-0 z-20 flex items-center justify-center px-6 md:px-16 pointer-events-none">
+    <div className="fixed inset-0 z-20 flex items-center justify-center px-4 sm:px-16 pointer-events-none">
       <AnimatePresence mode="wait">
         <motion.div
           key={proj.name}
@@ -50,8 +50,11 @@ export default function ProjectsSection({ scrollProgress = 0 }) {
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="w-full max-w-5xl pointer-events-auto"
-          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}
+          className="w-full max-w-5xl pointer-events-auto no-scrollbar grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
+          style={{
+            maxHeight: '85vh',
+            overflowY: 'auto',
+          }}
         >
           {/* ─── LEFT: Main card ─────────────────────────────────────── */}
           <motion.div
@@ -67,7 +70,7 @@ export default function ProjectsSection({ scrollProgress = 0 }) {
           >
             {/* Accent top bar + corner dots */}
             <div style={{ height: 2, background: `linear-gradient(90deg, transparent 0%, ${accent} 40%, ${accent} 60%, transparent 100%)` }} />
-            <div className="p-8">
+            <div className="p-5 sm:p-8">
               {/* Header row */}
               <motion.div variants={itemV} className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
@@ -167,12 +170,12 @@ export default function ProjectsSection({ scrollProgress = 0 }) {
             {/* Fingerprint bar chart */}
             <motion.div
               variants={itemV}
+              className="p-5 sm:p-6"
               style={{
                 background: 'rgba(7, 10, 28, 0.8)',
                 backdropFilter: 'blur(24px)',
                 borderRadius: '20px',
                 border: `1px solid rgba(${rgb}, 0.16)`,
-                padding: '24px',
                 flex: 1,
               }}
             >

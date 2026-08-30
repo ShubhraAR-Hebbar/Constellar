@@ -437,7 +437,7 @@ export default function ChatbotModal({
   return (
     <>
       {/* ── Floating Launcher Orb (Bottom Right) ───────────────────────────── */}
-      <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3 select-none">
+      <div className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 select-none ${isOpen ? 'hidden sm:flex' : 'flex'}`}>
         {/* Welcome Callout Badge (hidden once opened) */}
         {!isOpen && unreadCount > 0 && (
           <motion.div
@@ -523,7 +523,7 @@ export default function ChatbotModal({
             className={`fixed z-50 flex flex-col pointer-events-auto select-text font-sans-ui ${
               isExpanded
                 ? 'inset-4 sm:inset-10 sm:max-w-4xl sm:mx-auto'
-                : 'bottom-24 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-[450px] h-[580px] max-h-[calc(100vh-8rem)]'
+                : 'inset-3 sm:inset-auto sm:bottom-24 sm:right-6 w-[calc(100vw-1.5rem)] sm:w-[450px] h-[calc(100vh-2rem)] sm:h-[580px] max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-8rem)]'
             }`}
             style={{
               background: 'rgba(8, 13, 35, 0.94)',

@@ -18,7 +18,7 @@ export default function TimelineSection({ scrollProgress = 0 }) {
   const nodeLabel = isNodeA ? 'A' : 'B'
 
   return (
-    <div className="fixed inset-0 z-20 flex items-center justify-end px-8 md:px-16 lg:px-24 pointer-events-none">
+    <div className="fixed inset-0 z-20 flex items-center justify-end px-4 sm:px-8 md:px-16 lg:px-24 pointer-events-none">
       <AnimatePresence mode="wait">
         <motion.div
           key={exp.company}
@@ -26,14 +26,15 @@ export default function TimelineSection({ scrollProgress = 0 }) {
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="max-w-lg w-full pointer-events-auto"
+          className="max-w-lg w-full pointer-events-auto no-scrollbar p-5 sm:px-10 sm:py-9"
           style={{
             background: 'rgba(8, 13, 35, 0.78)',
             backdropFilter: 'blur(24px)',
             WebkitBackdropFilter: 'blur(24px)',
             border: '1px solid rgba(125,216,255,0.15)',
             borderRadius: '24px',
-            padding: '36px 40px',
+            maxHeight: '85vh',
+            overflowY: 'auto',
             boxShadow: '0 0 60px rgba(0,0,0,0.6), 0 0 30px rgba(125,216,255,0.07), inset 0 1px 0 rgba(255,255,255,0.05)',
           }}
         >

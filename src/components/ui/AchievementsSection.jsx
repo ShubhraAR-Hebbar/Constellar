@@ -19,21 +19,20 @@ export default function AchievementsSection({ scrollProgress = 0 }) {
   if (!isVisible) return null
 
   return (
-    <div className="fixed inset-0 z-20 flex items-center justify-center px-6 md:px-12 pointer-events-none">
+    <div className="fixed inset-0 z-20 flex items-center justify-center px-4 sm:px-12 pointer-events-none">
       <AnimatePresence>
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="max-w-4xl w-full pointer-events-auto"
+          className="max-w-4xl w-full pointer-events-auto no-scrollbar p-5 sm:px-10 sm:py-9"
           style={{
             background: 'rgba(8, 13, 35, 0.80)',
             backdropFilter: 'blur(24px)',
             WebkitBackdropFilter: 'blur(24px)',
             border: '1px solid rgba(125,216,255,0.12)',
             borderRadius: '28px',
-            padding: '36px 40px',
             maxHeight: '84vh',
             overflowY: 'auto',
             boxShadow: '0 0 60px rgba(0,0,0,0.7), 0 0 30px rgba(125,216,255,0.07), inset 0 1px 0 rgba(255,255,255,0.05)',
